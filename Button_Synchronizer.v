@@ -1,41 +1,48 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
+// Preston J Greenwood
+// ECE274a LAB5
+// 4/2/2025
 // 
-// Create Date: 04/02/2025 11:16:37 AM
-// Design Name: 
-// Module Name: Button_Synchronizer
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
+// Button_ Synchronizer
+// This outputs a pulse that lasts one clock cycle
+// regardless the duration of the input signal.
 //////////////////////////////////////////////////////////////////////////////////
 
 
 module Button_Synchronizer(in, clk, reset, out);
 input in, clk, reset;
-output out;
+output reg out;
 
-reg state;
-always @ (posedge clk) begin
-if (reset) begin
-state <= 0; 
-end
-else if (state) begin
-state <= 0;
-end
-else if (in) begin
-state <= 1;
-end
+localparam IDLE=0, PRESSED=1,LOCKOUT=2;
+
+reg state, nxtState;
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
+        state <= IDLE;
+        out <= 0;
+    end
+    else begin
+        state <= nxtState;
+    end
 end
 
-assign out = state;
+always @(*) begin
+nxtState = state;
+case (state)
+IDLE : begin
+if(in) begin
+    nxtState <= PRESSED;
+    end 
+    end
+PRESSED : begin nxtState <= LOCKOUT;
+        out <= 1; end 
+LOCKOUT : begin 
+            if (~in) begin
+                nxtState <= IDLE; end 
+            else begin nxtState <= LOCKOUT; end
+            out <= 0;
+            end
+endcase 
+end
 endmodule
