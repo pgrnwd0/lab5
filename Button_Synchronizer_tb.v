@@ -40,7 +40,7 @@ reset = 1;#40;
 reset = 0; #60;
 
 // in for more than 1 clk cycle
-in = 1; #60;
+in = 1; #200;
 in=0; #40;
 
 // in for less than 1 clk cycle
