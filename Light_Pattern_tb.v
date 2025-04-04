@@ -23,7 +23,6 @@
 module Light_Pattern_tb;
 
 reg play, start, reset, clk;
-wire [2:0]  state, l_state;
 wire LD3, LD2, LD1, LD0;
 
 Light_Pattern uut (
@@ -36,22 +35,26 @@ Light_Pattern uut (
 .LD1(LD1),
 .LD0(LD0));
 
-always #5 clk = ~clk;
+always #50 clk = ~clk;
 initial begin
 clk = 0;
 reset = 1;
-#10;
+#100;
 reset = 0;
-#10;
-start = 1;#10;
-start = 0;#60;
-play = 1; #10;
+#100;
+start = 1;#100;
+start = 0;#240;
+play = 1; #100;
+play = 0; #400;
+reset = 1; #100;
+reset = 0; #100;
+start = 1; #100;
+start = 0;#600;
+play = 1; #100;
 play = 0; #100;
-reset = 1; #10;
-reset = 0; #10;
-start = 1; #10;
-start = 0;
 reset=0;
+#500;
+$stop;
 
 end
 endmodule

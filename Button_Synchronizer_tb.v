@@ -32,27 +32,27 @@ Button_Synchronizer uut (
 .out(out)
 );
 
-always #20 clk = ~clk;
+always #50 clk = ~clk;
 initial begin
 clk =0;
 in = 0;
-reset = 1;#40;
-reset = 0; #60;
+reset = 1;#97;
+reset = 0; #100;
 
 // in for more than 1 clk cycle
-in = 1; #60;
-in=0; #40;
+in = 1; #200;
+in=0; #60;
 
 // in for less than 1 clk cycle
 #28;
-in = 1; #40;
-in = 0; #52;
+in = 1; #100;
+in = 0; #200;
 
 
 // in for 1 clk cycle
-#40;
-in=1; #40;
-in = 0;#40;
+#100;
+in=1; #100;
+in = 0;#100;
 
 
 $finish;
