@@ -42,7 +42,7 @@ always @(posedge clk or posedge reset) begin
 end
 
 always @(*) begin
-nxtState = state;
+// nxtState = state; uncomment if broken
 case (state)
 IDLE :  begin
         if (start)nxtState = FIRST;
