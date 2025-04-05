@@ -8,8 +8,6 @@
 // This outputs a pulse that lasts one clock cycle
 // regardless the duration of the input signal.
 //////////////////////////////////////////////////////////////////////////////////
-
-
 module Button_Synchronizer(in, clk, reset, out);
 input in, clk, reset;
 output reg out;
@@ -22,9 +20,7 @@ always @(posedge clk or posedge reset) begin
         state <= IDLE;
         out <= 0;
     end
-    else begin
-        state <= nxtState;
-    end
+    else begin state <= nxtState; end
 end
 
 always @(*) begin
