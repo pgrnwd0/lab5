@@ -13,9 +13,9 @@ module Top_Design(CLK100MHZ, BTNU, BTNC, BTND, LED);
 	//a) instantiate the Button synchronizer and make connections
 	wire startOut, playOut;
 	Button_Synchronizer play(BTND , CLK100MHZ, BTNU, playOut);
-	Button_Synchronizer start(BTNC, CLK100MHZ, BTNU, startOut);
+	//Button_Synchronizer start(BTNC, CLK100MHZ, BTNU, startOut);
 	//b) instantiate the light pattern generator and make connections.
-	Light_Pattern lights (startOut, playOut, BTNU, CLK100MHZ, LED[3], LED[2], LED[1], LED[0]);		
+	Light_Pattern lights (BTNC, playOut, BTNU, CLK100MHZ, LED[3], LED[2], LED[1], LED[0]);		
 
 
 endmodule
