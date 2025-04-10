@@ -35,25 +35,24 @@ Light_Pattern uut (
 .LD1(LD1),
 .LD0(LD0));
 
-always #50 clk = ~clk;
+always #100 clk = ~clk;
 initial begin
 clk = 0;
 reset = 1;
-#100;
+#200;
 reset = 0;
-#100;
-start = 1;#100;
-start = 0;#240;
-play = 1; #100;
-play = 0; #400;
-reset = 1; #100;
-reset = 0; #100;
-start = 1; #100;
-start = 0;#600;
-play = 1; #100;
-play = 0; #100;
+start = 1;#200;
+start = 0;#480;
+play = 1; #200;
+play = 0; #800;
+reset = 1; #200;
+reset = 0; #200;
+start = 1; #200;
+start = 0;#1200;
+play = 1; #200;
+play = 0; #200;
 reset=0;
-#500;
+#2000;
 $stop;
 
 end

@@ -42,10 +42,10 @@ always @(posedge clk or posedge reset) begin
 end
 
 always @(*) begin
-// nxtState = state; uncomment if broken
+nxtState = state;
 case (state)
 IDLE :  begin
-        if (start)nxtState = FIRST;
+        if (start)begin nxtState = FIRST;end
         else begin nxtState = IDLE; end 
         LD3 <=0; LD2<=0; LD1<=0; LD0 <=0; end
 FIRST : begin nxtState = SECOND;
