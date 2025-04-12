@@ -7,15 +7,15 @@ module Top_Design(CLK100MHZ, BTNU, BTNC, BTND, LED);
     // The code below is to instantiate the ClkDiv module that
 	//you can use for this part	
     wire ClkOut;
-    //ClkDiv a1(CLK100MHZ, 1'b0, ClkOut);
+	ClkDiv a1(CLK100MHZ, 1'b0, ClkOut); // uncommented ClkDiv
     
     //see figure 2 in the lab handout and add your code below to 
 	//a) instantiate the Button synchronizer and make connections
 	wire startOut, playOut;
-	Button_Synchronizer play(BTND , CLK100MHZ, BTNU, playOut);
+	Button_Synchronizer play(BTND , ClkOut, BTNU, playOut);
 	//Button_Synchronizer start(BTNC, CLK100MHZ, BTNU, startOut);
 	//b) instantiate the light pattern generator and make connections.
-	Light_Pattern lights (BTNC, playOut, BTNU, CLK100MHZ, LED[3], LED[2], LED[1], LED[0]);		
+	Light_Pattern lights (BTNC, playOut, BTNU, ClkOut, LED[3], LED[2], LED[1], LED[0]);		
 
 
 endmodule
